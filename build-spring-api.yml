@@ -28,7 +28,7 @@ spec:
   type: image
   params:
     - name: url
-      value: <DOCKER HUB USERNAME>/spring-api-tekton-demo
+      value: <DOCKER_USERNAME>/spring-api-tekton-demo
 
 ---
 apiVersion: tekton.dev/v1alpha1
