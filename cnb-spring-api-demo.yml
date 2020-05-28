@@ -1,0 +1,54 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: dockerhub-service
+secrets:
+  - name: regcred # Create secret for your container registry
+
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: spring-api-git
+spec:
+  type: git
+  params:
+    - name: revision
+      value: master
+    - name: url
+      value: https://github.com/BrianMMcClain/spring-boot-api-demo
+
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: spring-api-tekton-demo
+spec:
+  type: image
+  params:
+    - name: url
+      value: <DOCKER_USERNAME>/spring-api-tekton-demo
+
+---
+apiVersion: tekton.dev/v1alpha1
+kind: TaskRun
+metadata:
+  name: build-spring-api-with-buildpacks
+spec:
+  serviceAccountName: dockerhub-service
+  taskRef:
+    name: buildpacks-v3
+  inputs:
+    resources:
+    - name: source
+      resourceRef:
+        name: spring-api-git
+    params:
+    - name: BUILDER_IMAGE
+      value: cloudfoundry/cnb:bionic
+  outputs:
+    resources:
+    - name: image
+      resourceRef:
+        name: spring-api-tekton-demo
