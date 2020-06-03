@@ -6,4 +6,4 @@
 
 ## Examples
 
-**[build-spring-api.yml](build-spring-api.yml):** Build the [Spring Boot REST API Demo](https://github.com/BrianMMcClain/spring-boot-api-demo) using [Cloud Native Buildpacks](https://buildpacks.io/) and push it to Docker Hub. Requires the [Buildpack Task](https://github.com/tektoncd/catalog/tree/master/buildpacks) to be to be applied.
+**[cnb-spring-api-demo.yml](https://github.com/BrianMMcClain/tekton-examples/blob/master/cnb-spring-api-demo.yml):** Build the [Spring Boot REST API Demo](https://github.com/BrianMMcClain/spring-boot-api-demo) using [Cloud Native Buildpacks](https://buildpacks.io/) and push it to Docker Hub. Requires the [Buildpack Task](https://github.com/tektoncd/catalog/tree/master/buildpacks) to be to be applied.
